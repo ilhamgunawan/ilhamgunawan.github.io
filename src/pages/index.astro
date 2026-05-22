@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../components/Layout.astro';
+import Date from '../components/Date.astro';
+
+const allPosts = await getCollection('posts');
+const publishedPosts = allPosts
+  .filter(post => post.data.status === 'publish')
+	.sort((a, b) => b.data.date.localeCompare(a.data.date))
+	.map(post => ({
+		slug: post.data.slug,
+		title: post.data.title,
+		date: post.data.date,
+	}));
+const staticContent = {
+	header: {
+		title: "Hi, I'm Ilham 👋🏻",
+		description: "Random thoughts and stuff.",
+		socialLinks: [
+			{ name: 'Twitter', url: 'https://twitter.com/ilhammuhammadrg' },
+			{ name: 'LinkedIn', url: 'https://linkedin.com/in/ilham-gunawan' },
+			{ name: 'GitHub', url: 'https://github.com/ilhamgunawan' },
+			{ name: 'Medium', url: 'https://medium.com/@ilhammrg' },
+		],
+	},
+	main: {
+		title: "All Posts",
+	},
+};
+
+---
+
+<Layout>
+	<div class="w-full md:w-[720px] mx-auto flex flex-col justify-start items-start py-5 md:py-16 px-4">
+		<header class="flex flex-col justify-start items-start">
+			<h1 class="font-bold text-3xl mb-3 mx-0 pr-1 typewriter">{staticContent.header.title}</h1>
+			
+			<!-- Social Media Links -->
+			<ul class="mb-3 flex">
+				{staticContent.header.socialLinks.map((link, index) => (
+					<li class="flex">
+						<a class={`text-sm md:text-base font-semibold text-green-400! hover:opacity-70 ${index === 0 ? 'mr-1' : index === staticContent.header.socialLinks.length - 1 ? 'ml-1' : 'mx-1'}`} href={link.url} target="_blank" title={link.name}>
+							{link.name}
+						</a>
+						{index < staticContent.header.socialLinks.length - 1 && "|"}
+					</li>
+				))}
+			</ul>
+
+			<p class="font-light text-base md:text-lg">{staticContent.header.description}</p>
+		</header>
+		<main class="my-5">
+			<h2 class="my-4 text-xl font-bold">{staticContent.main.title}</h2>
+			
+			<!-- Posts List -->
+			<ul class="list-outside mb-8" data-testid="latest-posts">
+				{publishedPosts.map((post) => 
+					<li class="my-3">
+						<a
+							href={`/posts/${post.slug}`}
+							class="font-medium text-md text-gray-700! border-b-2 border-green-300/0 hover:border-green-300 hover:text-green-400! post-link"
+							title={post.title}
+							data-testid="latest-post-item"
+						>
+							{"📝"} <Date date={post.date} />: {post.title}
+						</a>
+					</li>)}
+			</ul>
+
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.post-link {
+    width: fit-content;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid #2c3e50;
+    animation: typing 3.5s steps(40, end), blink-cursor 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 230px;
+    }
+  }
+
+  @keyframes blink-cursor {
+    from,
+    to {
+      border-color: transparent;
+    }
+
+    50% {
+      border-color: #2c3e50;
+    }
+  }
+</style>
