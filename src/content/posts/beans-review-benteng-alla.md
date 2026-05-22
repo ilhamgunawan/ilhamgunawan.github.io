@@ -1,8 +1,7 @@
 ---
 slug: beans-review-benteng-alla
 title: "Beans Review: Benteng Alla"
-description: Review kopi arabica Sulawesi Benteng Alla dari region Lumbaja, Baroko, Enrekang dengan proses full-washed dan roasting profile medium.
-pubDate: 2023-02-18
+date: 2023-02-18
 author: ilhammrg
 status: publish
 tags:

@@ -1,8 +1,7 @@
 ---
 slug: banting-setir-part1
 title: Banting Setir 🚀 (part 1)
-description: Perjalanan seorang network engineer yang memutuskan untuk banting setir menjadi programmer. Sebuah cerita tentang mencari passion dan jati diri di dunia karir.
-pubDate: 2021-05-30
+date: 2021-05-30
 author: ilhammrg
 status: publish
 tags: 

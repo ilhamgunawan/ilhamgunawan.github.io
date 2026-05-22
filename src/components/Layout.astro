@@ -1,0 +1,99 @@
+---
+import '../styles/global.css';
+import SideBarDesktop from './SideBarDesktop.astro';
+import MenuMobile from './MenuMobile.astro';
+import type { PostByYear } from '../lib/posts';
+
+interface Meta {
+  title: string;
+  description: string;
+  keywords: string[];
+  author: string;
+  url: string;
+}
+
+export interface Props extends Partial<Meta> {
+  showSidebar?: boolean;
+  showMobileSidebar?: boolean;
+  postsByYear?: PostByYear[];
+  currentSlug?: string;
+}
+
+const defaultMeta: Meta = {
+  title: "Ilham Muhammad Ramdhan Gunawan",
+  description: "Hi, I'm Ilham Muhammad Ramdhan Gunawan. This website contains my writings, projects, and other things related to programming and web development.",
+  keywords: ["Ilham", "Ilham Gunawan", "Ilham Muhammad", "Ilham Muhammad Ramdhan Gunawan"],
+  author: "Ilham Muhammad Ramdhan Gunawan",
+  url: "https://ilhamgunawan.github.io"
+};
+
+const { title, description, keywords, author, url, showSidebar, showMobileSidebar, postsByYear, currentSlug } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description || defaultMeta.description} />
+    <meta name="keywords" content={keywords ? keywords.join(", ") : defaultMeta.keywords.join(", ")} />
+    <meta name="author" content={author || defaultMeta.author} />
+    <meta property="og:site_name" content={defaultMeta.title} />
+    <meta property="og:url" content={defaultMeta.url + (url || "")} />
+    <meta
+      property="og:title"
+      content={title ? [title, defaultMeta.title].join(" | ") : ""}
+    />
+    <meta
+      property="og:description"
+      content={description || defaultMeta.description}
+    />
+    <meta
+      property="og:image"
+      content={defaultMeta.url + "/icon.png"}
+    />
+    <meta property="og:type" content="article" />
+		<title>{title ? [title, defaultMeta.title].join(" | ") : defaultMeta.title}</title>
+	</head>
+	<body class="grid grid-rows-[1fr_auto] min-h-screen pb-6">
+		{showSidebar && postsByYear && (
+			<SideBarDesktop postsByYear={postsByYear} currentSlug={currentSlug ?? ""} />
+		)}
+		{showMobileSidebar && postsByYear && (
+			<>
+				<button id="mobile-menu-open" class="mobile-menu-toggle">📁</button>
+				<MenuMobile postsByYear={postsByYear} currentSlug={currentSlug ?? ""} />
+			</>
+		)}
+		<slot />
+    <footer class="px-4 my-5">
+      <span class="font-normal text-gray-500">All rights reserved © Ilham Gunawan 2021 - {new Date().getFullYear()}</span>
+    </footer>
+	</body>
+</html>
+
+<style>
+  .mobile-menu-toggle {
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    font-size: 1.2rem;
+    padding: 5px;
+    z-index: 50;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-toggle {
+      display: none;
+    }
+  }
+
+  @media (min-width: 769px) {
+    footer {
+      margin: 0 auto;
+      width: 720px;
+    }
+  }
+</style>

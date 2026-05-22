@@ -1,0 +1,177 @@
+---
+import type { PostByYear } from '../lib/posts';
+
+export interface Props {
+  postsByYear: PostByYear[];
+  currentSlug: string;
+}
+
+const { postsByYear, currentSlug } = Astro.props;
+---
+
+<aside id="mobile-menu" class="mobile-menu">
+  <button id="mobile-menu-close" class="close-btn">❎</button>
+  <div class="mb-1">
+    <a href="/" class="home-link">🏠 Home</a>
+  </div>
+  <nav>
+    <ul>
+      {postsByYear.map((group) => (
+        <li class="mob-directory-item">
+          <button class="mob-folder-btn">
+            <span class="mob-folder-icon">
+              {group.posts.some(p => p.slug === currentSlug) ? "📂" : "📁"}
+            </span>
+            {" "}{group.year}
+          </button>
+          <ul
+            class="mob-child-list"
+            style={group.posts.some(p => p.slug === currentSlug) ? "display:block" : "display:none"}
+          >
+            {group.posts.map((post) => (
+              <li>
+                <a
+                  href={`/posts/${post.slug}`}
+                  class={`mob-post-link${post.slug === currentSlug ? " mob-active" : ""}`}
+                  title={post.title}
+                >
+                  {"📝 "}{post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>
+
+<script>
+  const menu = document.getElementById("mobile-menu");
+
+  document.getElementById("mobile-menu-open")?.addEventListener("click", () => {
+    menu?.classList.add("is-open");
+  });
+
+  document.getElementById("mobile-menu-close")?.addEventListener("click", () => {
+    menu?.classList.remove("is-open");
+  });
+
+  document.querySelectorAll(".mob-post-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.remove("is-open");
+    });
+  });
+
+  document.querySelectorAll(".mob-directory-item").forEach((item) => {
+    const btn = item.querySelector(".mob-folder-btn");
+    const childList = item.querySelector(".mob-child-list") as HTMLElement | null;
+    const icon = item.querySelector(".mob-folder-icon");
+    if (!btn || !childList || !icon) return;
+
+    btn.addEventListener("click", () => {
+      const isOpen = childList.style.display === "block";
+      childList.style.display = isOpen ? "none" : "block";
+      icon.textContent = isOpen ? "📁" : "📂";
+    });
+  });
+</script>
+
+<style>
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 15px;
+    transform: translateY(-100vh);
+    background-color: rgba(249, 250, 251, 0.5);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+    z-index: 100;
+  }
+
+  .mobile-menu.is-open {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu {
+      display: none;
+    }
+  }
+
+  .close-btn {
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    font-size: 1.2rem;
+    padding: 5px;
+  }
+
+  .home-link {
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 7.5px;
+    transition: 0.05s;
+    display: inline-block;
+  }
+
+  .home-link:hover {
+    background-color: #eeecec;
+  }
+
+  .mob-folder-btn {
+    cursor: pointer;
+    color: #222;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 4px 8px;
+    margin-bottom: 5px;
+    border-radius: 7.5px;
+    transition: 0.05s;
+    width: 100%;
+    text-align: left;
+  }
+
+  .mob-folder-btn:hover {
+    background-color: #eeecec;
+  }
+
+  .mob-child-list {
+    padding-left: 10px;
+  }
+
+  .mob-child-list li {
+    margin-bottom: 5px;
+  }
+
+  .mob-post-link {
+    cursor: pointer;
+    color: #222;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 7.5px;
+    transition: 0.05s;
+    width: fit-content;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  .mob-post-link:hover {
+    background-color: #eeecec;
+  }
+
+  .mob-active {
+    background-color: rgba(52, 211, 153, 0.2);
+  }
+</style>

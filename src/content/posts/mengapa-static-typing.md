@@ -1,10 +1,9 @@
 ---
 slug: mengapa-static-typing
 title: Mengapa Static Typing Pada JavaScript?
-description: Membahas alasan mengapa static typing penting untuk JavaScript. Kelebihan dan kekurangan dari dynamic typing dan bagaimana type checking dapat membantu.
-pubDate: 2022-01-02
+date: 2022-01-02
 author: ilhammrg
-status: publish
+status: draft
 tags:
   - article
 ---

@@ -1,0 +1,171 @@
+---
+import type { PostByYear } from '../lib/posts';
+
+export interface Props {
+  postsByYear: PostByYear[];
+  currentSlug: string;
+}
+
+const { postsByYear, currentSlug } = Astro.props;
+---
+
+<aside class="side-bar-container">
+  <div class="side-bar-header">
+    <a href="/" class="header-link">🏠 Home</a>
+  </div>
+  <nav class="directory-nav">
+    <ul>
+      {postsByYear.map((group) => (
+        <li class="directory-item" data-year={group.year}>
+          <button class="directory-item-parent">
+            <span class="folder-icon">{group.posts.some(p => p.slug === currentSlug) ? "📂" : "📁"}</span>
+            {" "}{group.year}
+          </button>
+          <ul
+            class="child-list"
+            style={group.posts.some(p => p.slug === currentSlug) ? "display:block" : "display:none"}
+          >
+            {group.posts.map((post) => (
+              <li>
+                <a
+                  href={`/posts/${post.slug}`}
+                  class={`directory-item-link${post.slug === currentSlug ? " active" : ""}`}
+                  title={post.title}
+                >
+                  {"📝 "}{post.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".directory-item").forEach((item) => {
+    const btn = item.querySelector<HTMLButtonElement>(".directory-item-parent");
+    const childList = item.querySelector<HTMLElement>(".child-list");
+    const icon = item.querySelector<HTMLElement>(".folder-icon");
+    if (!btn || !childList || !icon) return;
+
+    btn.addEventListener("click", () => {
+      const isOpen = childList.style.display === "block";
+      childList.style.display = isOpen ? "none" : "block";
+      icon.textContent = isOpen ? "📁" : "📂";
+    });
+  });
+</script>
+
+<style>
+  .side-bar-container {
+    display: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .side-bar-container {
+      display: block;
+      position: fixed;
+      padding: 15px;
+      width: 150px;
+    }
+
+    .side-bar-header {
+      margin-bottom: 0.3rem;
+    }
+
+    .header-link {
+      color: #222;
+      font-size: 16px;
+      font-weight: 600;
+      display: inline-block;
+      width: 100%;
+      padding: 4px 8px;
+      border-radius: 7.5px;
+      transition: 0.05s;
+    }
+
+    .header-link:hover {
+      background-color: #eeecec;
+    }
+
+    .directory-item-parent {
+      cursor: pointer;
+      color: #222;
+      font-size: 0.8rem;
+      font-weight: 600;
+      width: 100%;
+      text-align: left;
+      padding: 4px 8px;
+      margin-bottom: 5px;
+      border-radius: 7.5px;
+      transition: 0.05s;
+    }
+
+    .directory-item-parent:hover {
+      background-color: #eeecec;
+    }
+
+    .child-list {
+      padding-left: 10px;
+    }
+
+    .child-list li {
+      margin-bottom: 5px;
+    }
+
+    .directory-item-link {
+      cursor: pointer;
+      color: #222;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 4px 8px;
+      border-radius: 7.5px;
+      transition: 0.05s;
+      width: 100%;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 1 !important;
+      -webkit-box-orient: vertical !important;
+    }
+
+    .directory-item-link:hover {
+      background-color: #eeecec;
+    }
+
+    .active {
+      background-color: rgba(52, 211, 153, 0.2);
+    }
+  }
+
+  @media screen and (min-width: 1100px) {
+    .side-bar-container {
+      width: 220px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .side-bar-container {
+      width: 280px;
+    }
+
+    .directory-item-link,
+    .directory-item-parent {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    .side-bar-container {
+      width: 320px;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .side-bar-container {
+      width: 500px;
+    }
+  }
+</style>

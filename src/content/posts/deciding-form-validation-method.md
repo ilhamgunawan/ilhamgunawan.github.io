@@ -1,8 +1,7 @@
 ---
 slug: deciding-form-validation-method
 title: Deciding Form Validation Method
-description: Essential considerations for web form validation - from email validation to password patterns, exploring different approaches to handle complex form requirements.
-pubDate: 2023-01-10
+date: 2023-01-10
 author: ilhammrg
 status: publish
 tags:

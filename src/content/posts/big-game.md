@@ -1,8 +1,7 @@
 ---
 slug: big-game
 title: Big Game
-description: What if we see our life as a whole video game? A reflection on setting goals, consistency, and breaking down complex missions into achievable tasks.
-pubDate: 2022-02-01
+date: 2022-02-01
 author: ilhammrg
 status: publish
 tags:

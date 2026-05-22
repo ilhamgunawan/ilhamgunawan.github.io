@@ -1,8 +1,7 @@
 ---
 slug: how-effective-am-i
 title: How Effective Am I?
-description: Reflections on being an effective engineer in a fast-paced software development environment. Exploring high-leverage activities and time management strategies.
-pubDate: 2023-01-06
+date: 2023-01-06
 author: ilhammrg
 status: publish
 tags:

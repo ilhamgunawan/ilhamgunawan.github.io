@@ -1,5 +1,5 @@
 {
-  "name": "ilhamgunawan.github.io",
+  "name": "astro",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,10 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.3",
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
-    "astro": "^6.1.1",
-    "sharp": "^0.34.3"
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.3",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3",
+    "zod": "^4.4.3"
   }
 }

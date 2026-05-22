@@ -1,8 +1,7 @@
 ---
 slug: banting-setir-part2
 title: Banting Setir 🚂 (part 2)
-description: Kelanjutan kisah banting setir dari network engineering ke software engineering. Mengapa memutuskan untuk pindah haluan dan faktor-faktor yang mempengaruhinya.
-pubDate: 2022-05-18
+date: 2022-05-18
 author: ilhammrg
 status: publish
 tags:

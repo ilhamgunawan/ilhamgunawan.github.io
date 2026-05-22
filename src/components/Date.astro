@@ -1,0 +1,23 @@
+---
+export interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+const parsedDate = new globalThis.Date(`${date}T00:00:00`);
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+}).format(parsedDate);
+---
+
+<time datetime={date}>
+  <span>{formattedDate}</span>
+</time>
+
+<style>
+  span {
+    color: #9b9b9b;
+  }
+</style>

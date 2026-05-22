@@ -1,8 +1,7 @@
 ---
 slug: kebiasaan-baru
 title: "Kebiasaan Baru"
-description: Lima tahun bekerja di Jakarta, berpindah kost-kostan, dan menemukan manfaat dari kebiasaan sederhana seperti jalan kaki ke kantor.
-pubDate: 2023-07-08
+date: 2023-07-08
 author: ilhammrg
 status: publish
 tags:

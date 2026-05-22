@@ -1,8 +1,7 @@
 ---
 slug: dopamine-detox
 title: Dopamine Detox a.k.a. Reset Otak
-description: Mengenal dopamine detox sebagai cara untuk mengatasi kecanduan smartphone dan kegiatan yang bersifat candu. Metode bertahap untuk reset otak dan meningkatkan fokus.
-pubDate: 2021-08-29
+date: 2021-08-29
 author: ilhammrg
 status: publish
 tags: 

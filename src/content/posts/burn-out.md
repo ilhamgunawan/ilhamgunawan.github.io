@@ -1,8 +1,7 @@
 ---
 slug: burn-out
 title: Burnout
-description: Memahami perbedaan antara stres dan burnout, gejala-gejalanya, dan dampaknya terhadap kehidupan sehari-hari. Kapan burnout terjadi dan bagaimana mengatasinya.
-pubDate: 2021-09-19
+date: 2021-09-19
 author: ilhammrg
 status: publish
 tags:

@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import Date from '../../components/Date.astro';
+import Author from '../../components/Author.astro';
+import { groupPostsByYear } from '../../lib/posts';
+import '../../styles/content.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts
+    .filter(post => post.data.status === 'publish')
+    .map(post => ({
+      params: { post: post.data.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('posts');
+const publishedPosts = allPosts
+  .filter(p => p.data.status === 'publish')
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .map(p => ({ slug: p.data.slug, title: p.data.title, date: p.data.date }));
+const postsByYear = groupPostsByYear(publishedPosts);
+---
+
+<Layout title={post.data.title} showSidebar={true} showMobileSidebar={true} postsByYear={postsByYear} currentSlug={post.data.slug}>
+  <main class="w-full md:w-[720px] mx-auto">
+    <div class="w-full px-4">
+      <article class="flex-auto pt-4 pb-12">
+        <header>
+          <h1 class="text-4xl mb-4">{post.data.title}</h1>
+          <div class="metadata flex flex-col md:flex-row md:gap-3 font-normal text-gray-400">
+            <div class="inline-block" title="Created At">📅 <Date date={post.data.date} /></div>
+          </div>
+        </header>
+        <div class="content">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
