@@ -13,6 +13,7 @@ const { postsByYear, currentSlug } = Astro.props;
   <button id="mobile-menu-close" class="close-btn">❎</button>
   <div class="mb-1">
     <a href="/" class="home-link">🏠 Home</a>
+    <a href="/about" class={`mob-post-link${currentSlug === 'about' ? " mob-active" : ""}`}>👤 About Me</a>
   </div>
   <nav>
     <ul>
