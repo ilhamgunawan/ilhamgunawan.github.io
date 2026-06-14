@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import { groupPostsByYear } from '../../../lib/posts';
+import '../../../styles/content.css';
+
+const allPosts = await getCollection('posts');
+const publishedPosts = allPosts
+  .filter(p => p.data.status === 'publish')
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .map(p => ({ slug: p.data.slug, title: p.data.title, date: p.data.date }));
+const postsByYear = groupPostsByYear(publishedPosts);
+---
+
+<Layout title="Knowledge Base" showSidebar={true} showMobileSidebar={true} postsByYear={postsByYear}>
+	<main class="w-full md:w-[720px] mx-auto">
+    <div class="w-full px-4">
+      <article class="flex-auto pt-4 pb-12">
+        <header>
+          <h1 class="text-4xl mb-4">🗄️ Relational Database</h1>
+        </header>
+        <div class="content">
+          <p>🚧 This page is under construction. Stay tuned!</p>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<style>
+	.post-link {
+    width: fit-content;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+  }
+</style>

@@ -14,6 +14,7 @@ const { postsByYear, currentSlug } = Astro.props;
   <div class="mb-1">
     <a href="/" class="home-link">🏠 Home</a>
     <a href="/about" class={`mob-post-link${currentSlug === 'about' ? " mob-active" : ""}`}>👤 About Me</a>
+    <a href="/kb" class={`mob-post-link${currentSlug === "kb" ? " mob-active" : ""}`}>📚 Knowledge Base</a>
   </div>
   <nav>
     <ul>
