@@ -13,6 +13,7 @@ const { postsByYear, currentSlug } = Astro.props;
   <div class="side-bar-header">
     <a href="/" class="header-link">🏠 Home</a>
     <a href="/about" class={`directory-item-link ${currentSlug === "about" ? " active" : ""}`}>👤 About Me</a>
+    <a href="/kb" class={`directory-item-link ${currentSlug === "kb" ? " active" : ""}`}>📚 Knowledge Base</a>
   </div>
   <nav class="directory-nav">
     <ul>

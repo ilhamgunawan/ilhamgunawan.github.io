@@ -4,7 +4,7 @@ import { groupPostsByYear } from '../lib/posts';
 import Layout from '../components/Layout.astro';
 import '../styles/content.css';
 
-const title = "🚧 About Me";
+const title = "👤 About Me";
 
 const allPosts = await getCollection('posts');
 const publishedPosts = allPosts
@@ -22,7 +22,7 @@ const postsByYear = groupPostsByYear(publishedPosts);
           <h1 class="text-4xl mb-4">{title}</h1>
         </header>
         <div class="content">
-          <p>This page is under construction. Stay tuned!</p>
+          <p>🚧 This page is under construction. Stay tuned!</p>
         </div>
       </article>
     </div>
