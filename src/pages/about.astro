@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { groupPostsByYear } from '../lib/posts';
 import Layout from '../components/Layout.astro';
+import Maintenance from '../components/Maintenance.astro';
 import '../styles/content.css';
 
 const title = "👤 About Me";
@@ -21,9 +22,7 @@ const postsByYear = groupPostsByYear(publishedPosts);
         <header>
           <h1 class="text-4xl mb-4">{title}</h1>
         </header>
-        <div class="content">
-          <p>🚧 This page is under construction. Stay tuned!</p>
-        </div>
+        <Maintenance />
       </article>
     </div>
   </main>
