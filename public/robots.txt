@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://ilhamgunawan.github.io/sitemap-index.xml
